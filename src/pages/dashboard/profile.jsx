@@ -25,7 +25,7 @@ import { platformSettingsData, conversationsData, projectsData } from "@/data";
 export function Profile() {
   return (
     <>
-      <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl bg-[url('/img/background-image.png')] bg-cover	bg-center">
+      <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl bg-[url('/img/background.jpg')] bg-cover	bg-center">
         <div className="absolute inset-0 h-full w-full bg-gray-900/75" />
       </div>
       <Card className="mx-3 -mt-16 mb-6 lg:mx-4 border border-blue-gray-100">
@@ -33,7 +33,7 @@ export function Profile() {
           <div className="mb-10 flex items-center justify-between flex-wrap gap-6">
             <div className="flex items-center gap-6">
               <Avatar
-                src="/img/bruce-mars.jpeg"
+                src="/img/325592205_707147937453097_8712344205819197173_n.jpg"
                 alt="bruce-mars"
                 size="xl"
                 variant="rounded"
@@ -41,13 +41,13 @@ export function Profile() {
               />
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  Richard Davis
+                Mazen Emad
                 </Typography>
                 <Typography
                   variant="small"
                   className="font-normal text-blue-gray-600"
                 >
-                  CEO / Co-Founder
+                  member
                 </Typography>
               </div>
             </div>
@@ -100,17 +100,18 @@ export function Profile() {
             </div>
             <ProfileInfoCard
               title="Profile Information"
-              description="Hi, I'm Alec Thompson, Decisions: If you can't decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+              description="Hi i'm mazen emad a front-end engineer :)"
               details={{
-                "first name": "Alec M. Thompson",
-                mobile: "(44) 123 1234 123",
-                email: "alecthompson@mail.com",
-                location: "USA",
+                "first name": "Mazen Emad",
+                mobile: "1128864281",
+                email: "mazen2m9@mail.com",
+                location: "EG",
                 social: (
                   <div className="flex items-center gap-4">
                     <i className="fa-brands fa-facebook text-blue-700" />
-                    <i className="fa-brands fa-twitter text-blue-400" />
+                    <i className="fa-brands fa-x text-black-400" />
                     <i className="fa-brands fa-instagram text-purple-500" />
+                    <i className="fa-brands fa-linkedin text-blue-500" />
                   </div>
                 ),
               }}
@@ -122,7 +123,7 @@ export function Profile() {
             />
             <div>
               <Typography variant="h6" color="blue-gray" className="mb-3">
-                Platform Settings
+                Messanger
               </Typography>
               <ul className="flex flex-col gap-6">
                 {conversationsData.map((props) => (
@@ -141,13 +142,13 @@ export function Profile() {
           </div>
           <div className="px-4 pb-4">
             <Typography variant="h6" color="blue-gray" className="mb-2">
-              Projects
+              Courses
             </Typography>
             <Typography
               variant="small"
               className="font-normal text-blue-gray-500"
             >
-              Architects design houses
+              Enrolled Courses
             </Typography>
             <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
               {projectsData.map(
@@ -188,7 +189,7 @@ export function Profile() {
                     <CardFooter className="mt-6 flex items-center justify-between py-0 px-1">
                       <Link to={route}>
                         <Button variant="outlined" size="sm">
-                          view project
+                          view Course
                         </Button>
                       </Link>
                       <div>
