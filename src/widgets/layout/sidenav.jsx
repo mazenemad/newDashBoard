@@ -8,9 +8,12 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
+import { LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/Auth";
 
 export function Sidenav({ brandImg, brandName, routes }) {
   const [controller, dispatch] = useMaterialTailwindController();
+  const {signout} = useAuth()
   const { sidenavColor, sidenavType, openSidenav } = controller;
   const sidenavTypes = {
     dark: "bg-gradient-to-br from-gray-800 to-gray-900",
@@ -48,7 +51,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
       </div>
       <div className="m-4">
         {routes.map(({ layout, title, pages }, key) => (
-          <ul key={key} className="mb-4 flex flex-col gap-1">
+          title !== "auth pages" &&<ul key={key} className="mb-4 flex flex-col gap-1">
             {title && (
               <li className="mx-3.5 mt-4 mb-2">
                 <Typography
@@ -90,6 +93,23 @@ export function Sidenav({ brandImg, brandName, routes }) {
             ))}
           </ul>
         ))}
+        <Button
+          variant={"text"}
+          color={
+            "blue-gray"
+          }
+          className="flex items-center gap-4 px-4 capitalize"
+          fullWidth
+          onClick={signout}
+        >
+          <LogOut strokeWidth={3} />
+          <Typography
+            color="inherit"
+            className="font-medium capitalize"
+          >
+            Logout
+          </Typography>
+        </Button>
       </div>
     </aside>
   );
