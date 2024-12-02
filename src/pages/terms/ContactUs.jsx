@@ -239,7 +239,7 @@ export default function ContactUs() {
 										</thead>
 										<tbody>
 											{adminMessages.map(
-												({ _id, user, createdAt, message }, key) => {
+												({ _id, firstName, lastName , email, phone, createdAt, message }, key) => {
 													const className = `py-3 px-5 ${key === adminMessages.length - 1
 														? ""
 														: "border-b border-blue-gray-50"
@@ -255,21 +255,21 @@ export default function ContactUs() {
 																			color="blue-gray"
 																			className="font-semibold"
 																		>
-																			{user.name}
+																			{firstName} {lastName}
 																		</Typography>
 																	</div>
 																</div>
 															</td>
 															<td className={className}>
 																<Typography className="text-xs font-semibold text-blue-gray-600">
-																	{user.email}
+																	{email}
 																</Typography>
 															</td>
 															<td className={className}>
 																<Chip
 																	variant="gradient"
 																	color={"blue-gray"}
-																	value={user.phone}
+																	value={phone}
 																	className="py-0.5 px-2 text-[11px] font-medium w-fit"
 																/>
 															</td>

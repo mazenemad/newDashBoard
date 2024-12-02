@@ -6,10 +6,10 @@ import {
   ServerStackIcon,
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
+import { Home, Profile, Tables, Notifications, Courses, CourseManager, PackagesManager, Packages, Course, Player, Signals } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
-import {Terms} from "@/pages/terms";
-import { Handshake, Headset } from "lucide-react";
+import { Terms } from "@/pages/terms";
+import { Boxes, GraduationCap, Handshake, Headset, SignalHigh, Video } from "lucide-react";
 import ContactUs from "./pages/terms/ContactUs";
 import { useAuth } from "./hooks/Auth";
 
@@ -29,19 +29,58 @@ export const routes = [
         element: <Home />,
       },
       {
+        icon: <GraduationCap {...icon} />,
+        name: "Courses",
+        path: "/courses",
+        element: <Courses />,
+      },
+      {
+        icon: <GraduationCap {...icon} />,
+        name: "Course",
+        path: "/course/:id",
+        element: <Course />,
+      },
+      {
+        icon: <GraduationCap {...icon} />,
+        name: "Courses Manager",
+        path: "/courses-manager",
+        element: <CourseManager />,
+        role: "admin"
+      },
+      {
+        icon: <Boxes {...icon} />,
+        name: "Packages",
+        path: "/packages",
+        element: <Packages />,
+      },
+      {
+        icon: <Boxes {...icon} />,
+        name: "Packages Manager",
+        path: "/packages-manager",
+        element: <PackagesManager />,
+        role: "admin"
+      },
+      {
         icon: <UserCircleIcon {...icon} />,
         name: "profile",
         path: "/profile",
         element: <Profile />,
       },
       {
-        icon: <TableCellsIcon {...icon} />,
-        name: "tables",
-        path: "/tables",
-        element: <Tables />,
+        icon: <SignalHigh {...icon} />,
+        name: "signals",
+        path: "/signals",
+        element: <Signals />,
+        role: "admin"
       },
+      // {
+      //   icon: <TableCellsIcon {...icon} />,
+      //   name: "tables",
+      //   path: "/tables",
+      //   element: <Tables />,
+      // },
       {
-        icon: <Headset {...icon}/>,
+        icon: <Headset {...icon} />,
         name: "Contact Us",
         path: "/contact-us",
         element: <ContactUs />,
@@ -52,7 +91,12 @@ export const routes = [
       //   path: "/notifications",
       //   element: <Notifications />,
       // },
-      
+      {
+        icon: <Video {...icon} />,
+        name: "lesson",
+        path: "/lesson/:id/course/:courseId",
+        element: <Player />,
+      }
     ],
   },
   {
@@ -76,14 +120,14 @@ export const routes = [
   {
     title: "terms and conditions",
     layout: "terms",
-    pages:[
+    pages: [
       {
-        icon: <Handshake {...icon}/>,
-    name: "terms and conditions",
-    path: "/terms-and-conditions",
-    element: <Terms />,
+        icon: <Handshake {...icon} />,
+        name: "terms and conditions",
+        path: "/terms-and-conditions",
+        element: <Terms />,
       },
-      
+
     ]
   },
 ];

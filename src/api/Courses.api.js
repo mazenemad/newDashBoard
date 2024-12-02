@@ -1,9 +1,9 @@
 import axiosClient from "@/api/axiosClient";
 
 export const CoursesApi = {
-  getAllCourses: () => {
+  getAllCourses: (limit, page) => {
     const url = "/course/";
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params: { limit: limit, page: page } });
   },
 
   addCourse: (data, token) => {

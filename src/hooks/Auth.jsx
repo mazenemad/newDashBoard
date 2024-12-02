@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { useSnackbar } from "./SnackBar";
-import { useNotificationsApi } from "./NotificationContext";
 import { useNavigate } from "react-router-dom";
+import { useNotificationsApi } from "./NotificationContext";
+import { useSnackbar } from "./SnackBar";
 
 export const AuthContext = createContext();
 
@@ -49,22 +49,16 @@ export const AuthProvider = ({ children }) => {
 		retrieveWithExpiration("account")
 	);
 	const socket = io(import.meta.env.VITE_BASEURL, {
+		// const socket = io("http://localhost:7000", {
 		auth: { token: auth },
 		reconnectionAttempts: 5,
 		reconnectionDelay: 1000,
 	});
-	useEffect(() => {
-		if (!socket || !account) return;
-		socket.emit("user_connected", account._id);
-		socket.on("connect", () => {
-			console.log("Socket connected on notify:", socket.connected); // Should log `true` if connected
-		});
-	}, [socket, account]);
 
 	useEffect(() => {
 		if (!socket || !account) return;
 		socket.on("connect", () => {
-			console.log("Socket connected on notify:", socket.connected); // Should log `true` if connected
+			// console.log("Socket connected on notify:", socket.connected); // Should log `true` if connected
 		});
 		if (account) {
 			// console.log(account._id);
@@ -78,9 +72,20 @@ export const AuthProvider = ({ children }) => {
 				setUnseenNotifications((prev) => [data, ...prev]);
 				setUnseenCount((prev) => prev + 1);
 			});
+			socket.on("newCampaign", (data) => {
+				openSnackbar(data.message, {
+					title: data.title,
+					type: "success",
+					duration: 10000,
+				});
+				// console.log(data, "newCampaign");
+				// setUnseenNotifications((prev) => [data, ...prev]);
+				// setUnseenCount((prev) => prev + 1);
+			});
 		}
 		return () => {
 			socket.off("signalRecive");
+			socket.off("newCampaign");
 		};
 	}, [socket, account]);
 	const reconnectSocket = () => {

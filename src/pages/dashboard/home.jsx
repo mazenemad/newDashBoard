@@ -26,12 +26,10 @@ import {
   ordersOverviewData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
+import { useAuth } from "@/hooks/Auth";
 
 export function Home() {
-
-  useEffect(()=>{
-    
-  },[])
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">

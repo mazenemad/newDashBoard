@@ -1,15 +1,16 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Dashboard, Auth,Terms} from "@/layouts";
 import { useAuth } from "./hooks/Auth";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  const {auth} = useAuth()
+  const {account} = useAuth()
   return (
     <Routes>
-      {auth ? <Route path="/dashboard/*" element={<Dashboard />} /> :
+      {account ? <Route path="/dashboard/*" element={<Dashboard />} /> :
       <Route path="/auth/*" element={<Auth />} />}
       <Route path="/terms/*" element={<Terms />} />
-      <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
