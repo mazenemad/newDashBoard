@@ -156,7 +156,7 @@ export function Tables() {
                         </div>
                       </td>
                       <td className={className}>
-                        {members.map(({ img, name }, key) => (
+                        {members?.map(({ img, name }, key) => (
                           <Tooltip key={name} content={name}>
                             <Avatar
                               src={img}

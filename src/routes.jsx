@@ -12,6 +12,7 @@ import { Terms } from "@/pages/terms";
 import { Boxes, GraduationCap, Handshake, Headset, SignalHigh, Video } from "lucide-react";
 import ContactUs from "./pages/terms/ContactUs";
 import { useAuth } from "./hooks/Auth";
+import ViewPackage from "./pages/dashboard/Package";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -52,6 +53,12 @@ export const routes = [
         name: "Packages",
         path: "/packages",
         element: <Packages />,
+      },
+       {
+        icon: <GraduationCap {...icon} />,
+        name: "Package",
+        path: "/package/:id",
+        element: <ViewPackage />,
       },
       {
         icon: <Boxes {...icon} />,

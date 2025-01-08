@@ -66,7 +66,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
                 {pages
                   .filter((page) => !page.role || page.role === account.role)
                   .map(({ icon, name, path }) => (
-                    name !== "Course" &&name !== "lesson" &&<li key={name}>
+                    name !== "Course" &&name !== "Package" &&name !== "lesson" &&<li key={name}>
                       <NavLink to={`/${layout}${path}`}>
                         {({ isActive }) => (
                           <Button

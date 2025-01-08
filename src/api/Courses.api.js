@@ -5,7 +5,7 @@ export const CoursesApi = {
     const url = "/course/";
     return axiosClient.get(url, { params: { limit: limit, page: page } });
   },
-
+  
   addCourse: (data, token) => {
     const url = "/course/";
     return axiosClient.post(url, data, { headers: { token: token } });
