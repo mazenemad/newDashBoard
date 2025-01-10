@@ -126,7 +126,7 @@ export function Courses() {
                   </Button>
                 </Link>
                 <div>
-                  {members?.map(({ photoLink, firstName, lastName, _id }, key) => (
+                  {members.map(({ photoLink, firstName, lastName, _id }, key) => (
                     <Tooltip key={_id} content={firstName + " " + lastName}>
                       <Avatar
                         src={photoLink || "https://res.cloudinary.com/dqdt57lxl/image/upload/v1733091929/jhl718s0eucpxdyqpzqh.png"}

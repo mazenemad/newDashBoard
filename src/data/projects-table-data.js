@@ -9,7 +9,7 @@ export const projectsTableData = [
       { img: "/img/team-4.jpeg", name: "Alexander Smith" },
     ],
     budget: "$14,000",
-    completion: 60,
+    completion: 100,
   },
   // {
   //   img: "/img/logo-atlassian.svg",

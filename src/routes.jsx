@@ -5,6 +5,7 @@ import {
   InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
+  WalletIcon
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications, Courses, CourseManager, PackagesManager, Packages, Course, Player, Signals } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
@@ -13,6 +14,8 @@ import { Boxes, GraduationCap, Handshake, Headset, SignalHigh, Video } from "luc
 import ContactUs from "./pages/terms/ContactUs";
 import { useAuth } from "./hooks/Auth";
 import ViewPackage from "./pages/dashboard/Package";
+import WalletDashboard from "./pages/dashboard/Wallet";
+import AdminWalletDashboard from "./pages/dashboard/AdminWallet";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -72,6 +75,21 @@ export const routes = [
         name: "profile",
         path: "/profile",
         element: <Profile />,
+        role: "user"
+      },
+      {
+        icon: <WalletIcon {...icon} />,
+        name: "wallet",
+        path: "/wallet",
+        element: <WalletDashboard />,
+        role: "user"
+      },
+      {
+        icon: <WalletIcon {...icon} />,
+        name: "adminWallet",
+        path: "/adminWallet",
+        element: <AdminWalletDashboard />,
+        role: "admin"
       },
       {
         icon: <SignalHigh {...icon} />,

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   Card,
@@ -23,20 +23,98 @@ import {
   statisticsCardsData,
   statisticsChartsData,
   projectsTableData,
-  ordersOverviewData,
+  // ordersOverviewData,
 } from "@/data";
-import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon, LinkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { useAuth } from "@/hooks/Auth";
+import WalletApi from "@/api/Wallet.api";
+import UserApi from "@/api/User.api";
+import {
+  BellIcon,
+  PlusCircleIcon,
+  ShoppingCartIcon,
+  CreditCardIcon,
+  LockOpenIcon,
+  BanknotesIcon,
+  CurrencyDollarIcon
+} from "@heroicons/react/24/solid";
 
+function formatDateToCustomString(date) {
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hour >= 12 ? "PM" : "AM";
+
+  const formattedHour = hour % 12 || 12; // Convert 24-hour to 12-hour format
+
+  return `${day} ${month} ${formattedHour} ${period}`;
+}
 export function Home() {
+  const [analysis,setAnalysis] = useState()
+  const [charts,setCharts] = useState()
+  const [team,setTeam] = useState()
+  const {auth,account} = useAuth()
+  const [ordersOverviewData,setOrdersOverviewData] = useState()
+  const getTeam = async ()=>{
+    const api = account.role === 'user'?await UserApi.getTeam(auth):await UserApi.getAdminTeam(auth)
+    console.log(api?.data?.formattedUsers)
+    setTeam(api?.data?.formattedUsers)
+  }
+  const now = new Date();
+  const getData = async ()=>{
+    const api = account.role === 'user'?await WalletApi.getUserWalletAnalysis(auth):await WalletApi.getAdminWalletAnalysis(auth)
+    console.log(api?.data?.analysis)
+    setAnalysis(api?.data?.analysis)
+    const ordersOverviewData = [
+  {
+    icon: LinkIcon,
+    color: "text-blue-gray-300",
+    title: `${api?.data?.analysis?.numberOfDeposits} Invitations sent`,
+    description: formatDateToCustomString(now),
+  },
+  {
+    icon: PlusCircleIcon,
+    color: "text-blue-gray-300",
+    title: `$${api?.data?.analysis?.totalDeposited} gain this month`,
+    description: formatDateToCustomString(now),
+  },
+  {
+    icon: CreditCardIcon,
+    color: "text-blue-gray-300",
+    title: `${api?.data?.analysis?.numberOfWithdrawals} Payments requests`,
+    description: formatDateToCustomString(now),
+  },
+  
+ 
+];
+setOrdersOverviewData(ordersOverviewData)
+  }
+  const getCharts = async ()=>{
+    const api =account.role === 'user'? await WalletApi.walletAnalysisCharts(auth):await WalletApi.adminWalletAnalysisCharts(auth)
+    console.log(api?.data?.statisticsChartsData)
+    setCharts(api?.data?.statisticsChartsData)
+  }
+  useEffect(()=>{
+    getData()
+    getCharts()
+    getTeam()
+  },[])
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-        {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
+        {statisticsCardsData.map(({ icon, title, footer, ...rest }) => 
+
+        {
+
+          return (
           <StatisticsCard
             key={title}
             {...rest}
+            value={analysis?analysis[rest.value]:0}
             title={title}
             icon={React.createElement(icon, {
               className: "w-6 h-6 text-white",
@@ -48,10 +126,11 @@ export function Home() {
               </Typography>
             }
           />
-        ))}
+        )}
+        )}
       </div>
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsChartsData.map((props) => (
+        {charts&&charts.map((props) => (
           <StatisticsChart
             key={props.title}
             {...props}
@@ -77,14 +156,14 @@ export function Home() {
           >
             <div>
               <Typography variant="h6" color="blue-gray" className="mb-1">
-                Projects
+                Members
               </Typography>
               <Typography
                 variant="small"
                 className="flex items-center gap-1 font-normal text-blue-gray-600"
               >
                 <CheckCircleIcon strokeWidth={3} className="h-4 w-4 text-blue-gray-200" />
-                <strong>30 done</strong> this month
+                <strong>{team?.length} done</strong> this month
               </Typography>
             </div>
             <Menu placement="left-start">
@@ -126,7 +205,7 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                {projectsTableData.map(
+                {team&&team.map(
                   ({ img, name, members, budget, completion }, key) => {
                     const className = `py-3 px-5 ${
                       key === projectsTableData.length - 1
@@ -217,7 +296,7 @@ export function Home() {
             </Typography> */}
           </CardHeader>
           <CardBody className="pt-0">
-            {ordersOverviewData.map(
+            {ordersOverviewData&&ordersOverviewData.map(
               ({ icon, color, title, description }, key) => (
                 <div key={title} className="flex items-start gap-4 py-3">
                   <div
