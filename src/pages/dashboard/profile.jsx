@@ -69,7 +69,7 @@ export function Profile() {
                 />
                 <div>
                   <Typography variant="h5" color="blue-gray" className="mb-1">
-                    Mazen Emad
+                    {user?.firstName} {user?.lastName}
                   </Typography>
                   <Typography
                     variant="small"

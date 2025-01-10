@@ -7,7 +7,8 @@ import ScrollToTopButton from "./components/video/ScrollToTop";
 import ContentTabs from "./components/video/ContentTabs";
 
 
-function Video({videoLink}) {
+function Video({ videoLink }) {
+
 	const { id } = useParams();
 	const [videoData, setVideoData] = useState(null);
 
@@ -49,27 +50,27 @@ function Video({videoLink}) {
 	};
 	return (
 		<div
-			className={`overflow-hidden w-full flex flex-col justify-start items-center  `}
+			className={`overflow-hidden w-full flex flex-col justify-start items-center mb-2`}
 		>
 			<VideoPlayer
 				url={videoLink ? videoLink : `${videoData?.lessonVideo}`}
 				sections={video ? sections : null}
-				onProgress={video ? handleProgress : () => {}}
+				onProgress={video ? handleProgress : () => { }}
 			/>
-			{
+			{/* {
 				<VideoSections
 					sections={data[1].sections}
 					onSectionClick={handleSectionClick}
 					currentSection={currentSection}
 				/>
-			}
-			<div className="w-screen fixed right-0 bottom-0 flex justify-end items-center gap-2">
+			} */}
+			{/* <div className="w-screen fixed right-0 bottom-0 flex justify-end items-center gap-2">
 				<ScrollToTopButton />
 				<ContentTabs
 					sections={data[1].sections}
 					onSectionClick={handleSectionClick}
 				/>
-			</div>
+			</div> */}
 		</div>
 	);
 }

@@ -15,6 +15,7 @@ import { useAuth } from "./hooks/Auth";
 import ViewPackage from "./pages/dashboard/Package";
 import MyCourses from "./pages/dashboard/MyCourses";
 import MyPackages from "./pages/dashboard/MyPackages";
+import { AgentSupportDashboard } from "./components/Support";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -30,6 +31,13 @@ export const routes = [
         name: "dashboard",
         path: "/home",
         element: <Home />,
+      },
+      {
+        icon: <Headset {...icon} />,
+        name: "Support",
+        path: "/support",
+        element: <AgentSupportDashboard />,
+        role: "support"
       },
       {
         icon: <GraduationCap {...icon} />,
@@ -68,6 +76,7 @@ export const routes = [
         name: "My Packages",
         path: "/my-packages",
         element: <MyPackages />,
+        role: "user"
       },
       {
         icon: <GraduationCap {...icon} />,
@@ -87,6 +96,7 @@ export const routes = [
         name: "profile",
         path: "/profile",
         element: <Profile />,
+        role: "user"
       },
       {
         icon: <SignalHigh {...icon} />,
