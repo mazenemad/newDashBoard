@@ -13,6 +13,8 @@ import { Boxes, GraduationCap, Handshake, Headset, SignalHigh, Video } from "luc
 import ContactUs from "./pages/terms/ContactUs";
 import { useAuth } from "./hooks/Auth";
 import ViewPackage from "./pages/dashboard/Package";
+import MyCourses from "./pages/dashboard/MyCourses";
+import MyPackages from "./pages/dashboard/MyPackages";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -37,6 +39,13 @@ export const routes = [
       },
       {
         icon: <GraduationCap {...icon} />,
+        name: "My Courses",
+        path: "/my-courses",
+        element: <MyCourses />,
+        role: "user"
+      },
+      {
+        icon: <GraduationCap {...icon} />,
         name: "Course",
         path: "/course/:id",
         element: <Course />,
@@ -54,7 +63,13 @@ export const routes = [
         path: "/packages",
         element: <Packages />,
       },
-       {
+      {
+        icon: <Boxes {...icon} />,
+        name: "My Packages",
+        path: "/my-packages",
+        element: <MyPackages />,
+      },
+      {
         icon: <GraduationCap {...icon} />,
         name: "Package",
         path: "/package/:id",

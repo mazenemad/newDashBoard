@@ -47,6 +47,16 @@ export function Course() {
     setLessons(filteredLessons);
   }, [search, allLessons]);
 
+  const purchaseCourse = () => {
+    CoursesApi.AddtoMyCourses(id, auth)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <div className="w-full min-h-screen p-4 flex flex-col justify-start items-start gap-4">
       {loading ? (
@@ -89,7 +99,7 @@ export function Course() {
                   </div>
                 </p>
               </div>
-              <Button color="lightBlue" size="regular" ripple="light">
+              <Button onClick={purchaseCourse} color="lightBlue" size="regular" ripple="light">
                 Enroll
               </Button>
             </div>
@@ -100,7 +110,7 @@ export function Course() {
               {course?.courseDescription}
             </Typography>
           </div>
-          <div className="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
+          <div className="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
             {lessons.map(
               ({ lessonCover, lessonTitle, lessonDescription, lessonVideo, _id }) => (
                 <Card
