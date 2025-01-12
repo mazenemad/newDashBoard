@@ -80,7 +80,7 @@ const AdminWalletDashboard = ({ stats, transactions, pieChartData }) => {
 
   const handleApproveTransaction = async (transactionId) => {
     try {
-      await axios.patch(`http://localhost:7000/api/v1/wallet/admin/wallets/transactions/${transactionId}/approve`,{},{headers:{token:auth}});
+      await axios.patch(`https://sea-turtle-app-rwcjs.ondigitalocean.app/api/v1/wallet/admin/wallets/transactions/${transactionId}/approve`,{},{headers:{token:auth}});
       setTransactionData((prev) =>
         prev.map((transaction) =>
           transaction.id === transactionId
@@ -97,7 +97,7 @@ const AdminWalletDashboard = ({ stats, transactions, pieChartData }) => {
 
   const handleRejectTransaction = async (transactionId) => {
     try {
-      await axios.patch(`http://localhost:7000/api/v1/wallet/admin/wallets/transactions/${transactionId}/reject`,{},{headers:{token:auth}});
+      await axios.patch(`https://sea-turtle-app-rwcjs.ondigitalocean.app/api/v1/wallet/admin/wallets/transactions/${transactionId}/reject`,{},{headers:{token:auth}});
       setTransactionData((prev) =>
         prev.map((transaction) =>
           transaction.id === transactionId

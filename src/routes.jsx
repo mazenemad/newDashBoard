@@ -14,8 +14,12 @@ import { Boxes, GraduationCap, Handshake, Headset, SignalHigh, Video } from "luc
 import ContactUs from "./pages/terms/ContactUs";
 import { useAuth } from "./hooks/Auth";
 import ViewPackage from "./pages/dashboard/Package";
+import MyCourses from "./pages/dashboard/MyCourses";
+import MyPackages from "./pages/dashboard/MyPackages";
+import { AgentSupportDashboard } from "./components/Support";
 import WalletDashboard from "./pages/dashboard/Wallet";
-import AdminWalletDashboard from "./pages/dashboard/AdminWallet";
+import AdminDashboardPage from "./pages/dashboard/AdminWallet";
+import CourseUploader from "./pages/dashboard/uploadCourses";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -33,6 +37,14 @@ export const routes = [
         element: <Home />,
       },
       {
+        icon: <Headset {...icon} />,
+        name: "Support",
+        path: "/support",
+        element: <AgentSupportDashboard />,
+        role: "support"
+      },
+      
+      {
         icon: <GraduationCap {...icon} />,
         name: "Courses",
         path: "/courses",
@@ -40,15 +52,29 @@ export const routes = [
       },
       {
         icon: <GraduationCap {...icon} />,
+        name: "My Courses",
+        path: "/my-courses",
+        element: <MyCourses />,
+        role: "user"
+      },
+      {
+        icon: <GraduationCap {...icon} />,
         name: "Course",
         path: "/course/:id",
         element: <Course />,
       },
+      // {
+      //   icon: <GraduationCap {...icon} />,
+      //   name: "Course uploader",
+      //   path: "/courseUploader",
+      //   element: <CourseUploader />,
+      //   role:'admin',
+      // },
       {
         icon: <GraduationCap {...icon} />,
         name: "Courses Manager",
         path: "/courses-manager",
-        element: <CourseManager />,
+        element: <CourseUploader />,
         role: "admin"
       },
       {
@@ -57,7 +83,14 @@ export const routes = [
         path: "/packages",
         element: <Packages />,
       },
-       {
+      {
+        icon: <Boxes {...icon} />,
+        name: "My Packages",
+        path: "/my-packages",
+        element: <MyPackages />,
+        role: "user"
+      },
+      {
         icon: <GraduationCap {...icon} />,
         name: "Package",
         path: "/package/:id",
@@ -77,7 +110,7 @@ export const routes = [
         element: <Profile />,
         role: "user"
       },
-      {
+        {
         icon: <WalletIcon {...icon} />,
         name: "wallet",
         path: "/wallet",
@@ -88,7 +121,7 @@ export const routes = [
         icon: <WalletIcon {...icon} />,
         name: "adminWallet",
         path: "/adminWallet",
-        element: <AdminWalletDashboard />,
+        element: <AdminDashboardPage />,
         role: "admin"
       },
       {

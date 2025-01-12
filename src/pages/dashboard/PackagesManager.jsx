@@ -44,7 +44,7 @@ export function PackagesManager() {
   const fetchPackages = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:7000/api/v1/package/`, {
+      const res = await fetch(`https://sea-turtle-app-rwcjs.ondigitalocean.app/api/v1/package/`, {
         headers: { token: `${auth}` },
       });
       const data = await res.json();
@@ -100,8 +100,8 @@ export function PackagesManager() {
     try {
       const token = auth;
       const url = editingPackage
-        ? `http://localhost:7000/api/v1/package/${editingPackage._id}`
-        : "http://localhost:7000/api/v1/package/create";
+        ? `https://sea-turtle-app-rwcjs.ondigitalocean.app/api/v1/package/${editingPackage._id}`
+        : "https://sea-turtle-app-rwcjs.ondigitalocean.app/api/v1/package/create";
 
       const res = await fetch(url, {
         method: editingPackage ? "PUT" : "POST",
@@ -125,7 +125,7 @@ export function PackagesManager() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this package?")) {
       try {
-        const res = await fetch(`http://localhost:7000/api/v1/package/${id}`, {
+        const res = await fetch(`https://sea-turtle-app-rwcjs.ondigitalocean.app/api/v1/package/${id}`, {
           method: "DELETE",
           headers: { token: `${auth}` },
         });

@@ -20,6 +20,11 @@ export const AdminApi = {
     const url = `/blockUser/${id}`;
     return axiosClient.patch(url, data, { headers: { token: token } });
   },
+  getRecentSupportSessions: (token) => {
+    const url = "/activeSupportSessions";
+    return axiosClient.get(url, { headers: { token: token } });
+  },
+
 };
 
 export default AdminApi;

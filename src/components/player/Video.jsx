@@ -7,7 +7,8 @@ import ScrollToTopButton from "./components/video/ScrollToTop";
 import ContentTabs from "./components/video/ContentTabs";
 
 
-function Video({videoLink}) {
+function Video({ videoLink }) {
+
 	const { id } = useParams();
 	const [videoData, setVideoData] = useState(null);
 
@@ -47,14 +48,18 @@ function Video({videoLink}) {
 			setCurrentSection(section.time);
 		}
 	};
+	function ensureHttps(url) {
+		if (!url) return '';
+		return url.startsWith('https://') ? url : `https://${url}`;
+  }
 	return (
 		<div
-			className={`overflow-hidden w-full flex flex-col justify-start items-center  `}
+			className={`overflow-hidden w-full flex flex-col justify-start items-center mb-2`}
 		>
 			<VideoPlayer
-				url={videoLink ? videoLink : `${videoData?.lessonVideo}`}
+				url={videoLink ? ensureHttps(videoLink) : `${ensureHttps(videoData?.lessonVideo)}`}
 				sections={video ? sections : null}
-				onProgress={video ? handleProgress : () => {}}
+				onProgress={video ? handleProgress : () => { }}
 			/>
 			{
 				<VideoSections

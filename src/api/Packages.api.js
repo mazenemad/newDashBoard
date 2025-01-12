@@ -20,6 +20,9 @@ const PackagesApi = {
   subscribeToPackage: (id, token) => {
     return axiosClient.post(`/package/subscribe/${id}`, {}, { headers: { token: token } });
   },
+  myPackages: (token) => {
+    return axiosClient.get('/package/my-packages/myPackages', { headers: { token: token } });
+  },
 }
 
 export default PackagesApi;

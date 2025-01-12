@@ -9,10 +9,12 @@ import {
 } from "@/widgets/layout";
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
-
+import { UserSupportChat } from "@/components/Support";
+import { useAuth } from "@/hooks/Auth";
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
+  const { account } = useAuth()
 
   return (
     <div className="min-h-screen bg-blue-gray-50/50">
@@ -43,6 +45,7 @@ export function Dashboard() {
               ))
           )}
         </Routes>
+        {account.role !== "support" && <UserSupportChat />}
         <div className="text-blue-gray-600">
           <Footer brandName="backbenchers" brandLink="'" />
         </div>

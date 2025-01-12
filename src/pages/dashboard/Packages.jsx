@@ -42,45 +42,45 @@ export function Packages() {
   };
 
   useEffect(() => {
-  setLoading(true);
-  PackagesApi.getAll()
-    .then((res) => {
-      setLoading(false);
+    setLoading(true);
+    PackagesApi.getAll()
+      .then((res) => {
+        setLoading(false);
 
-      // Ensure response structure matches your API response
-      const allData = res.data.data.map((pkg) => ({
-        ...pkg,
-        courses: pkg.features.courses, // Extract courses from features
-      }));
+        // Ensure response structure matches your API response
+        const allData = res.data.data.map((pkg) => ({
+          ...pkg,
+          courses: pkg.features.courses, // Extract courses from features
+        }));
 
-      setAllPackages(allData); // Store all packages fetched
-      setTotalPages(Math.ceil(allData.length / 10)); // Assuming 10 items per page
-    })
-    .catch((err) => {
-      console.error(err);
-      setLoading(false);
-    });
-}, []);
+        setAllPackages(allData); // Store all packages fetched
+        setTotalPages(Math.ceil(allData.length / 10)); // Assuming 10 items per page
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
 
   useEffect(() => {
     // Filter packages locally
     const filteredPackages = selectedCategories.length > 0
       ? allPackages.filter((pkg) =>
-          pkg.features.courses.some((course) =>
-            selectedCategories.includes(course.category) &&
-            (search
-              ? course.courseTitle.toLowerCase().includes(search.toLowerCase())
-              : true)
-          )
+        pkg.features.courses.some((course) =>
+          selectedCategories.includes(course.category) &&
+          (search
+            ? course.courseTitle.toLowerCase().includes(search.toLowerCase())
+            : true)
         )
+      )
       : allPackages.filter((pkg) =>
-          search
-            ? pkg.features.courses.some((course) =>
-                course.courseTitle.toLowerCase().includes(search.toLowerCase())
-              )
-            : true
-        );
+        search
+          ? pkg.features.courses.some((course) =>
+            course.courseTitle.toLowerCase().includes(search.toLowerCase())
+          )
+          : true
+      );
 
     setPackages(
       filteredPackages.slice((page - 1) * 10, page * 10) // Paginate locally
@@ -93,10 +93,10 @@ export function Packages() {
 
   return (
     <div className="w-full min-h-screen flex flex-col justify-start items-start gap-10">
-      <CategoryFilter
+      {/* <CategoryFilter
         categories={categories}
         onCategoryChange={handleCategorySelect}
-      />
+      /> */}
 
       <div className="w-full mt-6 grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
         {!loading &&
@@ -153,9 +153,8 @@ export function Packages() {
                           alt={courseTitle}
                           size="xs"
                           variant="circular"
-                          className={`cursor-pointer border-2 border-white ${
-                            key === 0 ? "" : "-ml-2.5"
-                          }`}
+                          className={`cursor-pointer border-2 border-white ${key === 0 ? "" : "-ml-2.5"
+                            }`}
                         />
                       </Tooltip>
                     )

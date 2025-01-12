@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom'
 
 export function Player() {
   const page = useLocation()
-  console.log(page.state)
+  // console.log(page.state)
   return (
-    <Video videoLink={page.state}/>
+    <Video videoLink={page.state} />
   )
 }
 

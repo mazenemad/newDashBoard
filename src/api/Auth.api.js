@@ -43,6 +43,16 @@ export const AuthApi = {
     return axiosClient.get(url, { headers: { token: token }, params: { limit: limit, page: page } });
   },
 
+  getUserData: (token) => {
+    const url = "/user/user/profile";
+    return axiosClient.get(url, { headers: { token: token } });
+  },
+
+  EditUserData: (data, token) => {
+    const url = "/user/updateProfile";
+    return axiosClient.patch(url, data, { headers: { token: token } });
+  },
+
 }
 
 export default AuthApi;

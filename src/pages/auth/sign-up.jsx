@@ -1,3 +1,4 @@
+import { AuthApi } from "@/api";
 import {
   Card,
   Input,
@@ -16,55 +17,63 @@ export function SignUp() {
     email: "",
     firstName: "",
     lastName: "",
-    username: "",
+    name: "",
     password: "",
     agree: false,
     invitationId: null,
   })
   const [loading, setLoading] = useState(false)
   const searchQuery = new URLSearchParams(location.search);
-const sponser = searchQuery.get('sponser');
-const invitationId = searchQuery.get('invitationId');
+  const sponser = searchQuery.get('sponser');
+  const invitationId = searchQuery.get('invitationId');
 
 
-useEffect(()=>{
-  if(sponser&&invitationId){
-    setUserData((prev)=>({
+  useEffect(() => {
+    if (sponser && invitationId) {
+      setUserData((prev) => ({
+        ...prev,
+        sponserId: sponser,
+        invitationId: invitationId
+      }))
+    }
+  }, [])
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(userData)
+    AuthApi.SignUp(userData)
+      .then((res) => {
+        console.log(res)
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    if (name === "agree") {
+      setUserData((prev) => ({
+        ...prev,
+        [name]: !userData.agree
+      }))
+      return
+    }
+    setUserData((prev) => ({
       ...prev,
-      sponserId:sponser,
-      invitationId:invitationId
+      [name]: value
     }))
   }
-},[])
 
 
-const handleSubmit = (e)=>{
-  e.preventDefault()
-  console.log(userData)
-}
-
-
-const handleChange = (e)=>{
-  const {name,value} = e.target
-  if(name==="agree"){
-    setUserData((prev)=>({
-      ...prev,
-      [name]:!userData.agree
-    }))
-    return
-  }
-  setUserData((prev)=>({
-    ...prev,
-    [name]:value
-  }))
-}
-
-
-return (
+  return (
     <section className="m-8 flex">
-            <div className="w-2/5 h-full hidden lg:block">
+      <div className="w-2/5 h-full hidden lg:block">
         <img
-          
+
           src="/img/background.jpg"
           className="h-[800px] w-full object-cover rounded-3xl"
         />
@@ -89,7 +98,7 @@ return (
               required
               name="sponserId"
               value={userData.sponserId}
-              disabled={userData.sponserId?true:false}
+              disabled={userData.sponserId ? true : false}
               onChange={handleChange}
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
@@ -141,7 +150,7 @@ return (
               onChange={handleChange}
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Username
+              name
             </Typography>
             <Input
               size="lg"
@@ -152,8 +161,8 @@ return (
               }}
               required
               type="text"
-              name="username"
-              value={userData.username}
+              name="name"
+              value={userData.name}
               onChange={handleChange}
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
@@ -197,14 +206,14 @@ return (
           />
           <Button type="submit" className="mt-6 h-12 flex justify-center items-center gap-2" fullWidth>
             Register Now
-            {loading && 
+            {loading &&
               <span className="flex justify-center items-center w-fit h-fit animate-spin">
-                <Loader2 color="white" size={16} strokeWidth={3}/>
+                <Loader2 color="white" size={16} strokeWidth={3} />
               </span>
             }
           </Button>
 
-          
+
           <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
             Already have an account?
             <Link to="/auth/sign-in" className="text-gray-900 ml-1">Sign in</Link>

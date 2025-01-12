@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 		retrieveWithExpiration("account")
 	);
 	const socket = io(import.meta.env.VITE_BASEURL, {
-		// const socket = io("http://localhost:7000", {
+		// const socket = io("https://sea-turtle-app-rwcjs.ondigitalocean.app", {
 		auth: { token: auth },
 		reconnectionAttempts: 5,
 		reconnectionDelay: 1000,
